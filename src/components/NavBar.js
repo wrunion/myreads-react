@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Menu, Icon } from 'semantic-ui-react'
+import { Link, useHistory } from 'react-router-dom'
 
 let { Item } = Menu;
 
@@ -20,9 +21,10 @@ export default class NavBar extends Component {
 
           <Menu.Menu position='right'>
             <Item
+              as={Link}
+              to='/bookshelf'
               name='bookshelf'
               active={activeItem === 'bookshelf'}
-              onClick={this.handleItemClick}
               >
               <Icon name='book' />
               Bookshelf
@@ -38,7 +40,6 @@ export default class NavBar extends Component {
           </Menu.Menu>
           
         </Menu>
-
       </div>
     )
   }
