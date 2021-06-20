@@ -1,23 +1,27 @@
 import React from 'react'
-// import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './../utils/BooksAPI'
 import NavBar from './NavBar'
-import Search from './Search'
-import Bookshelf from './Bookshelf'
+// import Search from './Search'
+import Page from './Page'
 
 import { Route } from 'react-router-dom'
 import './App.css'
 
 class BooksApp extends React.Component {
   state = {
-    showSearchPage: false
+    books: []
+  }
+
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+      this.setState(() => ({ books }))
+    })
   }
 
   render() {
     return (
       <div className="app ui container">
-        <NavBar 
-        
-        />
+        <NavBar />
        
         <Route exact path='/search'
           // render={() => (
@@ -29,8 +33,8 @@ class BooksApp extends React.Component {
 
         <Route exact path='/bookshelf'
           render={() => (
-          <Bookshelf 
-          
+          <Page 
+            books={this.state.books}
           />
           )}
         />
