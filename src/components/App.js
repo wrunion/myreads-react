@@ -1,5 +1,6 @@
 import React from 'react'
 // import * as BooksAPI from './BooksAPI'
+import NavBar from './NavBar'
 import './App.css'
 
 class BooksApp extends React.Component {
@@ -15,7 +16,7 @@ class BooksApp extends React.Component {
 
   render() {
     return (
-      <div className="app">
+      <div className="app ui container">
         {this.state.showSearchPage ? (
           <div className="search-books">
             <div className="search-books-bar">
@@ -38,8 +39,11 @@ class BooksApp extends React.Component {
             </div>
           </div>
         ) : (
+          <>
+          <NavBar>
+
           <div className="list-books">
-            <div className="list-books-title">
+          <div className="list-books-title">
               <h1>MyReads</h1>
             </div>
             <div className="list-books-content">
@@ -197,6 +201,8 @@ class BooksApp extends React.Component {
               <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
             </div>
           </div>
+          </NavBar>
+          </>
         )}
       </div>
     )
