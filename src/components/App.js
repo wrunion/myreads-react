@@ -16,20 +16,18 @@ class BooksApp extends React.Component {
     return (
       <div className="app ui container">
         <NavBar 
-          onItemClick={(history, path) => {
-            history.push(path)
-          }}
+        
         />
        
         <Route exact path='/search'
-          render={() => (
-          <Search 
+          // render={() => (
+          // <Search 
           
-          />
-          )} 
+          // />
+          // )} 
         />
 
-        <Route path='/bookshelf'
+        <Route exact path='/bookshelf'
           render={() => (
           <Bookshelf 
           

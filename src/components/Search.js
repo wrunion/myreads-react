@@ -5,7 +5,7 @@ export default class Search extends Component {
   render() {
     return (
       <div className="search-books">
-        <div className="search-books-bar">
+        <div className="search-books-bar"  style={{paddingTop: '25em'}}>
           <button className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</button>
           <div className="search-books-input-wrapper">
             {/*
