@@ -40,12 +40,12 @@ class BooksApp extends React.Component {
           </div>
         ) : (
           <>
-          <NavBar>
+          <NavBar />
 
           <div className="list-books">
-          <div className="list-books-title">
+          {/* <div className="list-books-title">
               <h1>MyReads</h1>
-            </div>
+            </div> */}
             <div className="list-books-content">
               <div>
                 <div className="bookshelf">
@@ -201,7 +201,6 @@ class BooksApp extends React.Component {
               <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
             </div>
           </div>
-          </NavBar>
           </>
         )}
       </div>

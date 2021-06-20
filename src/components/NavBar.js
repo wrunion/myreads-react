@@ -1,43 +1,12 @@
-// import React, { Component } from 'react'
-// import { Menu } from 'semantic-ui-react'
-
-// export default class NavBar extends Component {
-//   state = { activeItem: 'bio' }
-
-//   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
-//   render() {
-//     const { activeItem } = this.state
-
-//     return (
-//       <Menu tabular>
-
-//         <Menu.Item
-//           name='Bookshelf'
-//           active={activeItem === 'bio'}
-//           onClick={this.handleItemClick}
-//         />
-//         <Menu.Item
-//           name='Add Book'
-//           active={activeItem === 'photos'}
-//           onClick={this.handleItemClick}
-//         />
-//         <Menu.Item
-//           name='Search'
-//           active={activeItem === 'photos'}
-//           onClick={this.handleItemClick}
-//         />
-
-//       </Menu>
-//     )
-//   }
-// }
-
 import React, { Component } from 'react'
-import { Menu, Segment } from 'semantic-ui-react'
+import { Menu, Icon } from 'semantic-ui-react'
 
-export default class MenuExampleSecondaryPointing extends Component {
-  state = { activeItem: 'home' }
+let { Item } = Menu;
+
+export default class NavBar extends Component {
+  state = { 
+    activeItem: 'bookshelf' 
+  }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
@@ -45,28 +14,31 @@ export default class MenuExampleSecondaryPointing extends Component {
     const { activeItem } = this.state
 
     return (
-      <div style={{ margin: '1.5em 0 0 0' }}>
+      <div style={{ marginTop: '1.5em' }}>
         <Menu pointing secondary>
-          <Menu.Item
-            name='Bookshelf'
-            active={activeItem === 'home'}
-            onClick={this.handleItemClick}
-          />
-          {/* <Menu.Item
-            name='Add Book'
-            active={activeItem === 'messages'}
-            onClick={this.handleItemClick}
-          /> */}
-          <Menu.Item
-            name='Search'
-            active={activeItem === 'friends'}
-            onClick={this.handleItemClick}
-          />
+          <Item header>MyReads</Item>
+
+          <Menu.Menu position='right'>
+            <Item
+              name='bookshelf'
+              active={activeItem === 'bookshelf'}
+              onClick={this.handleItemClick}
+              >
+              <Icon name='book' />
+              Bookshelf
+            </Item>
+            <Item
+              name='search'
+              active={activeItem === 'search'}
+              onClick={this.handleItemClick}
+              >
+              <Icon name='search' />
+              Search
+            </Item>
+          </Menu.Menu>
+          
         </Menu>
 
-        <Segment>
-          {this.props.children}
-        </Segment>
       </div>
     )
   }
