@@ -24,7 +24,7 @@ export default function Bookshelf({ books, displayName, updateShelf }) {
                   authors={authors}
                   shelf={shelf}
                   updateShelf={updateShelf}
-                  thumbnailURL={book.imageLinks.smallThumbnail}
+                  thumbnailURL={book.imageLinks?.smallThumbnail || ''}
                 />
               </li>
             )
@@ -33,6 +33,14 @@ export default function Bookshelf({ books, displayName, updateShelf }) {
       </div>
     </div>
   )} else {
-    return null;
+    return (
+      <div className="bookshelf ui raised segment" 
+      style={{ marginTop: '1em', height: '15em' }}>
+        <h2 className="bookshelf-title">{displayName}</h2>
+        <div className='no-books-div'>
+          <p style={{ color: 'grey' }}>No books yet</p>
+        </div>
+      </div>
+    );
   }
 }

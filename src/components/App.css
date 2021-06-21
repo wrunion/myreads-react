@@ -25,6 +25,7 @@ body {
 .bookshelf {
   padding: 1em;
   margin: 5em;
+  margin-top: 1em; 
 }
 
 @media (min-width: 600px) {
@@ -197,4 +198,16 @@ button:active {
   padding: 20px 10px 0;
   text-align: center;
   font-size: 0.8em;
+}
+
+/* bookshelf component */
+
+.no-books-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-books-div p {
+  color: grey;
 }

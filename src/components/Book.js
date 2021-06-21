@@ -1,17 +1,20 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { useLocation } from 'react-router-dom'
 
-export default class Book extends Component {
+const Book = props => {
 
-  render() {
-  
-  const { thumbnailURL, title, authors, id, shelf, updateShelf, book } = this.props;
+  const location = useLocation().pathname; 
+
+  const { thumbnailURL, title, authors, id, shelf, updateShelf, book } = props;
 
   return (
     <div className="book" key={id}>
       <div className="book-top">
-        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${thumbnailURL})` }}></div>
+        <div className="book-cover" 
+          style={{ width: 128, height: 193, backgroundImage: `url(${thumbnailURL || ''})`, backgroundSize: '100%', backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center'  }}></div>
         <div className="book-shelf-changer">
-          <select value={shelf}
+          <select value={location === '/search' ? 'none' : shelf}
             onChange={((e) => {
               updateShelf({ shelf: e.target.value, book })
             })}>
@@ -25,48 +28,10 @@ export default class Book extends Component {
       </div>
       <div className="book-title">{title}</div>
       <div className="book-authors">
-        {authors?.map(author => author + ' ')}
+        {authors?.join(`, `)}
       </div>
     </div>
   )
- }
 }
-  // Books api returns:
-  // Shelf (str)
-  // Title (str)
-  // Authors (array)
-  // Id (str)
-  
-  // imageLinks.smallThumbnail 
-  // And 
-  // imageLinks.thumbnail
-  // const [shelf, setShelf] = useState('')
 
-  // useEffect(() => {
-  //   setShelf(shelf)
-  // }, [shelf])
-
-//   return (
-//     <div className="book" key={id}>
-//       <div className="book-top">
-//         <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${thumbnailURL})` }}></div>
-//         <div className="book-shelf-changer">
-//           {/* TODO: add a way to track this state  */}
-//           <select value={shelf} onChange={() => {
-
-//           }}>
-//             <option value="move" disabled>Move to...</option>
-//             <option value="currentlyReading">Currently Reading</option>
-//             <option value="wantToRead">Want to Read</option>
-//             <option value="read">Read</option>
-//             <option value="none">None</option>
-//           </select>
-//         </div>
-//       </div>
-//       <div className="book-title">{title}</div>
-//       <div className="book-authors">{authors.map(author => author + ' ')}</div>
-//     </div>
-//   )
-// }
-
-// export default Book;
+export default Book; 
