@@ -1,7 +1,7 @@
 import React from 'react'
 import Book from './Book'
 
-export default function Bookshelf({ books, displayName }) {
+export default function Bookshelf({ books, displayName, updateShelf }) {
   
   if (books && books.length > 0) {
 
@@ -18,10 +18,12 @@ export default function Bookshelf({ books, displayName }) {
             return (
               <li key={id}>
                 <Book 
+                  book={book}
                   id={id}
                   title={title}
                   authors={authors}
                   shelf={shelf}
+                  updateShelf={updateShelf}
                   thumbnailURL={book.imageLinks.smallThumbnail}
                 />
               </li>

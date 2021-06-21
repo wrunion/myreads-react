@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Bookshelf from './Bookshelf'
+import { Link } from 'react-router-dom'
 
 const shelves = [
   {
@@ -7,12 +8,12 @@ const shelves = [
     variableName: 'currentlyReading'
   },
   {
-    displayName: 'Read',
-    variableName: 'read'
-  },
-  {
     displayName: 'Want to Read',
     variableName: 'wantToRead'
+  },
+  {
+    displayName: 'Read',
+    variableName: 'read'
   }
 ];
 
@@ -28,15 +29,16 @@ export default class Page extends Component {
             <Bookshelf 
               displayName={shelf.displayName}
               books={this.props.books.filter(e => e.shelf === shelf.variableName)}
+              updateShelf={this.props.updateShelf}
             />
             
           </div>
         ))}
 
         <div className="open-search">
-          <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
+          {/* <Link to='/search' as={button}></Link> */}
+          <button as={Link} to='/search'>Add a book</button>
         </div>
-
       </div>
     )
   }
