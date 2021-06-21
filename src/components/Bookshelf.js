@@ -1,7 +1,7 @@
 import React from 'react'
 import Book from './Book'
 
-export default function Bookshelf({ books, displayName, updateShelf }) {
+export default function Bookshelf({ books, displayName, updateBook }) {
   
   if (books && books.length > 0) {
 
@@ -13,6 +13,7 @@ export default function Bookshelf({ books, displayName, updateShelf }) {
       <div className="bookshelf-books">
         <ol className="books-grid">
           {books.map((book) => {
+            
             const { id, title, authors, shelf } = book;
 
             return (
@@ -23,7 +24,7 @@ export default function Bookshelf({ books, displayName, updateShelf }) {
                   title={title}
                   authors={authors}
                   shelf={shelf}
-                  updateShelf={updateShelf}
+                  updateBook={updateBook}
                   thumbnailURL={book.imageLinks?.smallThumbnail || ''}
                 />
               </li>

@@ -5,20 +5,36 @@ import * as BooksAPI from './../utils/BooksAPI'
 
 const Search = (props) => {
 
-  const { updateShelf } = props;
-  const [query, setQuery] = useState('')
+  const { updateBook, shelves } = props;
+
   const [results, setResults] = useState([])
  
   const handleInputChange = async (e) => {
-    setQuery(e.target.value)
-
+    /* If the search box is empty, show no results */
     if (e.target.value === undefined || e.target.value === '') {
-      setResults([]); 
-      return; 
+      setResults([]); return; 
     }
+    /* Deconstruct shelf state from props */
+    const { currentlyReading, wantToRead, read } = shelves;
+
+    /* Search API call */
     const results = await BooksAPI.search(e.target.value) || [];
-    setResults(results)
-    console.log(results)
+
+    if (!results || !results.length > 0) {
+      setResults([]); return; 
+    }
+    /* Check if book is currently on a shelf, and if so, add that information to the book object before passing it to the filteredResults array */
+    const filteredResults = results?.map((book) => {
+      if (currentlyReading.includes(book.id)) { 
+        book.shelf = 'currentlyReading'; return book; }
+      if (wantToRead.includes(book.id)) { 
+        book.shelf = 'wantToRead'; return book; }
+      if (read.includes(book.id)) { 
+        book.shelf = 'read'; return book; }
+      else { return book; }
+    })
+    /* Pass the results to component state */
+    setResults(filteredResults)
   }
 
   return (
@@ -41,7 +57,7 @@ const Search = (props) => {
       {(results && results.length > 0) &&
       <Bookshelf
         displayName='Search Results'
-        updateShelf={updateShelf}
+        updateBook={updateBook}
         books={results} 
         />}
     </div>

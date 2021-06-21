@@ -9,23 +9,43 @@ import './App.css'
 
 class App extends React.Component {
   state = {
-    books: []
+    books: [], 
+    shelves: {
+      currentlyReading: [],
+      wantToRead: [],
+      read: []
+    }
+  }
+
+  updateBook = async ({ book, shelf }) => {
+    await BooksAPI.update(book, shelf);
+
+    BooksAPI.get(book.id).then(() => {
+      BooksAPI.getAll().then((books) => {
+        this.setState(() => ({ books }))
+      })
+    }).catch(err => console.error(err))
+  }
+
+  updatesShelves(books) {
+    /* Filter books by shelf */
+    const currentlyReading = books.filter(book => book.shelf === 'currentlyReading').map(book => book.id);
+    const wantToRead = books.filter(book => book.shelf === 'wantToRead').map(book => book.id);
+    const read = books.filter(book => book.shelf === 'read').map(book => book.id);
+
+    this.setState((currentState) => ({ 
+      ...currentState, 
+      shelves: { currentlyReading, wantToRead, read }
+    }))
   }
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
-      this.setState(() => ({ books }))
-    })
-  }
 
-  updateShelf = async ({ book, shelf }) => {
-    await BooksAPI.update(book, shelf);
+      this.setState(() => ({ books }));
+      this.updatesShelves(books);
 
-    BooksAPI.get(book.id).then((book) => {
-      BooksAPI.getAll().then((books) => {
-        this.setState(() => ({ books }))
-      })
-    }).catch(err => console.log(err))
+    }).catch(err => console.error(err))
   }
   
   render() {
@@ -36,7 +56,8 @@ class App extends React.Component {
         <Route exact path='/search'
           render={() => (
             <Search 
-              updateShelf={this.updateShelf} 
+              shelves={this.state.shelves}
+              updateBook={this.updateBook} 
             />
           )} 
         />
@@ -44,7 +65,7 @@ class App extends React.Component {
           render={() => (
             <BookDisplayPage 
               books={this.state.books}
-              updateShelf={this.updateShelf}
+              updateBook={this.updateBook}
             />
           )}
         />

@@ -1,11 +1,8 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom'
 
 const Book = props => {
-
-  const location = useLocation().pathname; 
-
-  const { thumbnailURL, title, authors, id, shelf, updateShelf, book } = props;
+  
+  const { thumbnailURL, title, authors, id, shelf, updateBook, book } = props;
 
   return (
     <div className="book" key={id}>
@@ -14,9 +11,10 @@ const Book = props => {
           style={{ width: 128, height: 193, backgroundImage: `url(${thumbnailURL || ''})`, backgroundSize: '100%', backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center'  }}></div>
         <div className="book-shelf-changer">
-          <select value={location === '/search' ? 'none' : shelf}
+          <select 
+            value={shelf || 'none'}
             onChange={((e) => {
-              updateShelf({ shelf: e.target.value, book })
+              updateBook({ shelf: e.target.value, book })
             })}>
             <option value="move" disabled>Move to...</option>
             <option value="currentlyReading">Currently Reading</option>

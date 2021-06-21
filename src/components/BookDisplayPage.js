@@ -20,7 +20,7 @@ const shelves = [
 
 const BookDisplayPage = props => {
 
-  const { updateShelf, books } = props;
+  const { updateBook, books } = props;
   
   return (
     <div className="list-books">
@@ -30,7 +30,7 @@ const BookDisplayPage = props => {
           <Bookshelf 
             displayName={shelf.displayName}
             books={books.filter(e => e.shelf === shelf.variableName)}
-            updateShelf={updateShelf}
+            updateBook={updateBook}
           />
         </div>
       ))}
