@@ -1,7 +1,7 @@
 # React Udacity: MyReads
 
 ## About
-This is a book search app for Udacity's React Nanodegree. This application allows users to search for books from a 3rd party API, and add books to their "bookshelves." It's an exercise in component state. 
+This is a book search app for Udacity's React Nanodegree. This application allows users to search for books from a 3rd party API, and add books to their "bookshelves." It also allows them to move books between their shelves by marking each book as, "Currently Reading," "Want to Read," or "Read."
 
 ## To Run
 * download the code to your local machine: 

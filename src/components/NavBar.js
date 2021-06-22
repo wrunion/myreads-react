@@ -1,7 +1,7 @@
 import React from 'react'
 import { Menu, Icon } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom'
-let { Item } = Menu;
+let { Item } = Menu
 
 const NavBar = () => {
 
@@ -13,14 +13,14 @@ const NavBar = () => {
         <Menu.Menu position='right'>
           <Item
             as={NavLink}
-            to='/bookshelf'
+            exact to='/'
             >
             <Icon name='book' />
             Bookshelf
           </Item>
           <Item
             as={NavLink}
-            to='/search'
+            exact to='/search'
             >
             <Icon name='search' />
             Search

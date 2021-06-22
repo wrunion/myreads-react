@@ -24,7 +24,8 @@ const BookDisplayPage = props => {
   
   return (
     <div className="list-books">
-      
+      {/* Map over the array above and 
+      render each item as a Bookshelf object */}
       {shelves.map((shelf) => (
         <div className="list-books-content" key={shelf.displayName}>
           <Bookshelf 
@@ -34,7 +35,7 @@ const BookDisplayPage = props => {
           />
         </div>
       ))}
-
+      {/* Link to the search page  */}
       <div className="open-search">
         <Button icon circular={true} color='grey' as={Link} to='/search'>
           <Icon name='plus' />

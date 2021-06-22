@@ -1,15 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Input } from 'semantic-ui-react'
 import Bookshelf from './Bookshelf'
 import * as BooksAPI from './../utils/BooksAPI'
 
 const Search = (props) => {
 
-  const { updateBook, shelves } = props;
-
-  const [results, setResults] = useState([])
+  const { updateBook, shelves, searchResults, setResults } = props;
  
   const handleInputChange = async (e) => {
+
     /* If the search box is empty, show no results */
     if (e.target.value === undefined || e.target.value === '') {
       setResults([]); return; 
@@ -23,6 +22,7 @@ const Search = (props) => {
     if (!results || !results.length > 0) {
       setResults([]); return; 
     }
+
     /* Check if book is currently on a shelf, and if so, add that information to the book object before passing it to the filteredResults array */
     const filteredResults = results?.map((book) => {
       if (currentlyReading.includes(book.id)) { 
@@ -33,7 +33,7 @@ const Search = (props) => {
         book.shelf = 'read'; return book; }
       else { return book; }
     })
-    /* Pass the results to component state */
+    /* Pass the results to parent component */
     setResults(filteredResults)
   }
 
@@ -46,6 +46,7 @@ const Search = (props) => {
           onChange={(e) => handleInputChange(e)}
         />
       </div>
+      
       <details style={{ margin: '1.5em', lineHeight: '2em' }}>
         <summary><span>Search tips</span></summary>
         <strong>The only search terms that will work are: </strong>
@@ -54,11 +55,11 @@ const Search = (props) => {
         </div>
       </details>
 
-      {(results && results.length > 0) &&
+      {(searchResults && searchResults.length > 0) &&
       <Bookshelf
         displayName='Search Results'
         updateBook={updateBook}
-        books={results} 
+        books={searchResults} 
         />}
     </div>
   )

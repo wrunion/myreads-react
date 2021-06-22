@@ -6,6 +6,7 @@ const Book = props => {
 
   return (
     <div className="book" key={id}>
+      
       <div className="book-top">
         <div className="book-cover" 
           style={{ width: 128, height: 193, backgroundImage: `url(${thumbnailURL || ''})`, backgroundSize: '100%', backgroundRepeat: 'no-repeat',
@@ -24,10 +25,13 @@ const Book = props => {
           </select>
         </div>
       </div>
+      
       <div className="book-title">{title}</div>
+
       <div className="book-authors">
         {authors?.join(`, `)}
       </div>
+
     </div>
   )
 }

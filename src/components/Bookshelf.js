@@ -34,9 +34,11 @@ export default function Bookshelf({ books, displayName, updateBook }) {
       </div>
     </div>
   )} else {
+    // If no books are on a given shelf, 
+    // return a placeholder shelf with a single string as contents
     return (
       <div className="bookshelf ui raised segment" 
-      style={{ marginTop: '1em', height: '15em' }}>
+        style={{ marginTop: '1em', height: '15em' }}>
         <h2 className="bookshelf-title">{displayName}</h2>
         <div className='no-books-div'>
           <p style={{ color: 'grey' }}>No books yet</p>
